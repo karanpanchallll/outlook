@@ -12,11 +12,11 @@
   <DisplayName DefaultValue="Power Automate Trigger"/>
   <Description DefaultValue="Trigger Power Automate flow from Outlook"/>
   <IconUrl DefaultValue="https://karanpanchallll.github.io/outlook/"/>
-  <HighResolutionIconUrl DefaultValue="https://your-domain.com/icon-128.png"/>
-  <SupportUrl DefaultValue="https://your-domain.com/support"/>
+  <HighResolutionIconUrl DefaultValue="https://karanpanchallll.github.io/outlook/"/>
+  <SupportUrl DefaultValue="https://karanpanchallll.github.io/outlook/"/>
   
   <AppDomains>
-    <AppDomain>https://your-domain.com</AppDomain>
+    <AppDomain>https://karanpanchallll.github.io/outlook/</AppDomain>
   </AppDomains>
   
   <Hosts>
