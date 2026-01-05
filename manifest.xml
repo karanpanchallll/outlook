@@ -6,17 +6,17 @@
            xsi:type="MailApp">
   
   <Id>12345678-1234-1234-1234-123456789012</Id>
-  <Version>1.0.0.0</Version>
+  <Version>1.0.0.2</Version>
   <ProviderName>Your Company</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Power Automate Trigger"/>
+  <DisplayName DefaultValue="Trigger Flow"/>
   <Description DefaultValue="Trigger Power Automate flow from Outlook"/>
-  <IconUrl DefaultValue="https://karan-dsw.github.io/outlook//icon-64.png"/>
-  <HighResolutionIconUrl DefaultValue="https://karan-dsw.github.io/outlook//icon-128.png"/>
-  <SupportUrl DefaultValue="https://karan-dsw.github.io/outlook//support"/>
+  <IconUrl DefaultValue="https://karan-dsw.github.io/outlook/icon-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://karan-dsw.github.io/outlook/icon-128.png"/>
+  <SupportUrl DefaultValue="https://karan-dsw.github.io/outlook/support"/>
   
   <AppDomains>
-    <AppDomain>https://karan-dsw.github.io/outlook/</AppDomain>
+    <AppDomain>https://karan-dsw.github.io</AppDomain>
   </AppDomains>
   
   <Hosts>
@@ -32,7 +32,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://karan-dsw.github.io/outlook//taskpane.html"/>
+        <SourceLocation DefaultValue="https://karan-dsw.github.io/outlook/taskpane.html"/>
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -46,7 +46,7 @@
   
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
     <Requirements>
-      <bt:Sets DefaultMinVersion="1.3">
+      <bt:Sets DefaultMinVersion="1.5">
         <bt:Set Name="Mailbox"/>
       </bt:Sets>
     </Requirements>
@@ -56,49 +56,56 @@
         <DesktopFormFactor>
           <FunctionFile resid="Commands.Url"/>
           
+          <!-- MESSAGE READ SURFACE - This is the main reading area -->
           <ExtensionPoint xsi:type="MessageReadCommandSurface">
+            <!-- Using TabDefault puts it in the Home tab -->
             <OfficeTab id="TabDefault">
-              <Group id="msgReadGroup">
+              <!-- Create a custom group that appears earlier in the ribbon -->
+              <Group id="msgReadCustomGroup">
                 <Label resid="GroupLabel"/>
+                <!-- OverriddenByRibbonApi=false ensures it's always visible -->
                 
-                <Control xsi:type="Button" id="msgReadOpenPaneButton">
-                  <Label resid="TaskpaneButton.Label"/>
+                <!-- Primary action button -->
+                <Control xsi:type="Button" id="msgReadTriggerButton">
+                  <Label resid="TriggerButton.Label"/>
                   <Supertip>
-                    <Title resid="TaskpaneButton.Label"/>
-                    <Description resid="TaskpaneButton.Tooltip"/>
+                    <Title resid="TriggerButton.SupertipTitle"/>
+                    <Description resid="TriggerButton.SupertipText"/>
                   </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="Icon.16x16"/>
                     <bt:Image size="32" resid="Icon.32x32"/>
                     <bt:Image size="80" resid="Icon.80x80"/>
                   </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <SourceLocation resid="Taskpane.Url"/>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>triggerFlowFromRibbon</FunctionName>
                   </Action>
                 </Control>
               </Group>
             </OfficeTab>
           </ExtensionPoint>
+          
         </DesktopFormFactor>
       </Host>
     </Hosts>
     
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon.16x16" DefaultValue="https://karan-dsw.github.io/outlook//icon-16.png"/>
-        <bt:Image id="Icon.32x32" DefaultValue="https://karan-dsw.github.io/outlook//icon-32.png"/>
-        <bt:Image id="Icon.80x80" DefaultValue="https://karan-dsw.github.io/outlook//icon-80.png"/>
+        <bt:Image id="Icon.16x16" DefaultValue="https://karan-dsw.github.io/outlook/icon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://karan-dsw.github.io/outlook/icon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://karan-dsw.github.io/outlook/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Commands.Url" DefaultValue="https://karan-dsw.github.io/outlook//commands.html"/>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://karan-dsw.github.io/outlook//taskpane.html"/>
+        <bt:Url id="Commands.Url" DefaultValue="https://karan-dsw.github.io/outlook/commands.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://karan-dsw.github.io/outlook/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GroupLabel" DefaultValue="Power Automate"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Trigger Flow"/>
+        <bt:String id="GroupLabel" DefaultValue="Flow Actions"/>
+        <bt:String id="TriggerButton.Label" DefaultValue="Trigger Flow"/>
+        <bt:String id="TriggerButton.SupertipTitle" DefaultValue="Trigger Power Automate"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to trigger your Power Automate flow"/>
+        <bt:String id="TriggerButton.SupertipText" DefaultValue="Analyze this email and trigger the Power Automate workflow for routing"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
