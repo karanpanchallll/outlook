@@ -48,7 +48,7 @@ async function triggerFlowFromRibbon(event) {
                 type: "informationalMessage",
                 message: "Email processed successfully ✓",
                 icon: "Icon.16x16",
-                persistent: false
+                persistent: true
             }
         );
 
@@ -186,3 +186,4 @@ Office.actions.associate("triggerFlowFromRibbon", triggerFlowFromRibbon);
 </script>
 </body>
 </html>
+
